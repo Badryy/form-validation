@@ -4,7 +4,6 @@ import { Button } from 'primereact/button';
 
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-//import { Form } from 'primereact/form';
 
 function MyForm() {
   const [name, setName] = useState('');
@@ -12,18 +11,17 @@ function MyForm() {
   const [password, setPassword] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  // const [data, setData] = useState([]);
-  // const [columns, setColumns] = useState([
-  //   { field: 'name', header: 'Name' },
-  //   { field: 'password', header: 'Email' },
-  // ]);
+  const data = [
+    { name:'Badru', email: 'badru@github.com' },
+    { name:'Bob', email: 'bob@gmail.com' }
+  ]
 
   const validate = (e: any) => {
     let isValid = true;
     if (e.target.name === 'name' && e.target.value.length === 0) {
       isValid = false;
     }
-    if (e.target.name === 'email' && !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(e.target.value)) {
+    if (e.target.name === 'email' && !/^\w+([.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(e.target.value)) {
       isValid = false;
     }
     if (e.target.name === 'password' && e.target.value.length < 6) {
@@ -67,6 +65,10 @@ function MyForm() {
         </div>
       </form>
       <h1>{name} {email}</h1>
+      <DataTable value={data} >
+        <Column field='name' header="Name" />
+        <Column field='email' header="Email" />
+      </DataTable>
     </div>
   );
 }
